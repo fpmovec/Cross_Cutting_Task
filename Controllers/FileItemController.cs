@@ -17,12 +17,20 @@ namespace Cross_Cutting_Task.Controllers
         [HttpGet]
         [Route("fileslist")]
         public async Task<IActionResult> GetList()
-            => new OkObjectResult(await _repository.GetAllAsync());
+        {
+            if (await _repository.IsEmpty())
+                return NoContent();
+
+            return new OkObjectResult(await _repository.GetAllAsync());
+        }
 
         [HttpGet]
         [Route("file/{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
+            if (await _repository.IsEmpty())
+                return NoContent();
+
             var file = await _repository.GetItemByIdAsync(id);
             return new OkObjectResult(file);
         }
@@ -33,14 +41,20 @@ namespace Cross_Cutting_Task.Controllers
         {
             if (item is null)
                 return BadRequest();
+            if (await _repository.IsEmpty())
+                return NoContent();
+
             await _repository.AddAsync(item);
-            return StatusCode(201, Json(true));
+            return StatusCode(201);
         }
 
         [HttpPut]
         [Route("update/{id}")]
         public async Task<IActionResult> UpdateAsync(int id, [FromForm] FileItem item)
         {
+            if (await _repository.IsEmpty())
+                return NoContent();
+
             var product = await _repository.GetItemByIdAsync(id);
             if (product is null)
                 return NotFound();
@@ -54,12 +68,15 @@ namespace Cross_Cutting_Task.Controllers
         [Route("delete/{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
+            if (await _repository.IsEmpty())
+                return NoContent();
+
             var product = await _repository.GetItemByIdAsync(id);
             if (product is null)
                 return NotFound();
 
             await _repository.DeleteAsync(id);
-            return new OkObjectResult(id);
+            return new OkResult();
         }
     }
 }

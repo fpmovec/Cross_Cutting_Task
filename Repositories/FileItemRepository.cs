@@ -18,6 +18,9 @@ namespace Cross_Cutting_Task.Repositories
             => await _context.FileItems.FirstAsync(x => x.Id == id);
         public List<FileItem> GetItems()
             => _context.FileItems.ToList();
+        public async Task<bool> IsEmpty()
+            => await Task.FromResult(_context.FileItems.Count() == 0);
+       
         public async Task<bool> AddAsync(FileItem item)
         {
             await _context.FileItems.AddAsync(item);

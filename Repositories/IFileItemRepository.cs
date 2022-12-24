@@ -10,6 +10,7 @@ namespace Cross_Cutting_Task.Repositories
         List<FileItem> GetItems();
         Task<FileItem> GetItemByIdAsync(int id);
         Task<bool> DeleteAsync(int id);
+        Task<bool> IsEmpty();
         
     }
 }
