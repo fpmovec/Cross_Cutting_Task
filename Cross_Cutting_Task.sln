@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2.csproj", "{EE192063-066F-427C-BB17-D2D29069CB55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cross_Cutting_Task", "Cross_Cutting_Task.csproj", "{EE192063-066F-427C-BB17-D2D29069CB55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
